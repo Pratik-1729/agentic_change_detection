@@ -5,8 +5,8 @@ from app.schemas.pipeline_state import PipelineState
 import app.models.dummy
 
 state = PipelineState(
-    image_t1="data/input/t1.png",
-    image_t2="data/input/t2.png",
+    image_t1="data/input/t1.tif",
+    image_t2="data/input/t2.tif",
 )
 
 workflow = Workflow()

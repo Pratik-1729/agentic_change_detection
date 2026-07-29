@@ -2,7 +2,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from app.agents.base_agent import BaseAgent
+from app.interfaces.base_agent import BaseAgent
 from app.schemas.pipeline_state import PipelineState
 
 
@@ -29,3 +29,4 @@ class ValidationAgent(BaseAgent):
         state.validation_status = True
 
         return state
+    
