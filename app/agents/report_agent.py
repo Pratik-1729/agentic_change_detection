@@ -32,6 +32,7 @@ class ReportAgent(BaseAgent):
 
             state.overlay_path = self._save_overlay(state, job_dir)
             state.report_path = self._save_report(state, job_dir)
+            state.json_report_path =  self._save_json_report(state, job_dir)
 
             logger.info(f"Report written to {job_dir}")
 

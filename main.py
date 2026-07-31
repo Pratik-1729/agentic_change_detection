@@ -35,6 +35,7 @@ def main():
     print("stats:", result.statistics)
     print("overlay:", result.overlay_path)
     print("report:", result.report_path)
+    print("json_report:", result.json_report_path)
 
 
 if __name__ == "__main__":

@@ -9,8 +9,8 @@ class IngestionAgent(BaseAgent):
 
     def run(self, state: PipelineState) -> PipelineState:
 
-        state.job_id = str(uuid.uuid4())
-
+        if not state.job_id:
+            state.job_id = str(uuid.uuid4())
         logger.info(f"Created Job {state.job_id}")
 
         return state

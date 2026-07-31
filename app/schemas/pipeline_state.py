@@ -45,6 +45,7 @@ class PipelineState(BaseModel):
     # Outputs
     overlay_path: Optional[str] = None
     report_path: Optional[str] = None
+    json_report_path: Optional[str] = None
 
     # Errors
     errors: list[str] = Field(default_factory=list)
