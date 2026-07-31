@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import json
 import cv2
 import numpy as np
 
@@ -108,3 +108,37 @@ class ReportAgent(BaseAgent):
         report_path.write_text("\n".join(lines), encoding="utf-8")
 
         return str(report_path)
+
+    def _save_json_report(self, state, job_dir):
+            source = state.validated_regions or state.descriptions
+    
+            regions_json = [
+                {
+                    "id": r.get("id"),
+                    "bbox": r.get("bbox"),
+                    "description": r.get("description"),
+                    "decision": r.get("decision"),
+                    "reason": r.get("reason"),
+                    "confidence": r.get("confidence"),
+                }
+                # drop "crop" (PIL.Image) -- not JSON serializable and not
+                # useful in a JSON report anyway; overlay.png already
+                # shows the boxes visually
+                for r in source
+            ]
+    
+            payload = {
+                "job_id": state.job_id,
+                "model": state.selected_model,
+                "vlm": state.selected_vlm,
+                "statistics": state.statistics,
+                "regions": regions_json,
+                "errors": state.errors,
+                "metadata": state.metadata,
+                "overlay_path": state.overlay_path,
+            }
+    
+            json_path = job_dir / "report.json"
+            json_path.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
+    
+            return str(json_path)
